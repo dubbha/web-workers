@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<head lang="en">
+  <meta charset="utf-8">
+  <title>Web Worker</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body class="red">
+  <div class="outer">
+    <div class="inner">
+      <button class="button" onClick="setBg('red')">red</button>
+      <button class="button" onClick="setBg('green')">green</button>
+      <button class="button" onClick="setBg('blue')">blue</button>
+    </div>
+    <div class="inner">
+      <button id="trigger" class="button trigger">Run the long task in Web Worker</button>
+    </div>
+  </div>
+
+  <script>
+      const worker = new Worker('task.js');  // init web worker
+  
+      const body = document.querySelector('body');
+      const trigger = document.querySelector('#trigger');
+  
+      worker.addEventListener('message', result => {  // listener for messages from web worker
+        trigger.innerText = `Result from Web Worker: [${result.data}]. Run again?`;
+        trigger.onclick = run;
+      });
+
+      function run() {
+        trigger.innerText = 'Running the task... UI stays responsive [check buttons above]';
+        trigger.onclick = null;
+        worker.postMessage({
+          func: 'fib',
+          args: [15, 25, 35, 45],
+        });  // send message to web worker to init the task
+      }
+  
+      function setBg(color) {
+        document.querySelector('body').className = color;
+      }
+
+      trigger.onclick = run;
+    </script>
+
+</body>

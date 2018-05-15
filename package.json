@@ -1,0 +1,19 @@
+{
+  "name": "webworker",
+  "version": "1.0.0",
+  "description": "Web Worker playground",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dubbha/webworker.git"
+  },
+  "author": "Alex Dubovyk",
+  "license": "ISC",
+  "homepage": "https://github.com/dubbha/webworker#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
