@@ -10,7 +10,9 @@ function fib(n) {
 self.addEventListener('message', (message) => {
   console.log('Web Worker received message:', message);
 
-  const result = fib(45);
+  if (message.data === 'start') {
+    const result = fib(45);
 
-  self.postMessage(result);  // send result back
+    self.postMessage(result);  // send result back
+  }
 });
