@@ -1,1 +1,4 @@
-body { height: 100vh; display: flex; justify-content: center; align-items: center }
+body { height: 100vh; display: flex; justify-content: center; align-items: center; font-family: 'Noto Serif', serif; font-size: 24px; }
+a, a:visited { color: #666 }
+a:hover { color: #999 }
+
