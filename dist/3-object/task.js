@@ -10,7 +10,7 @@ function fib(n) {
 self.addEventListener('message', (message) => {
   console.log('Web Worker received message:', message);
 
-  const { func, args } = message.data;
+  const { func, args } = message.data;  // { func: 'fib', args: [...] }
 
   let result;
   switch (func) {
@@ -21,7 +21,7 @@ self.addEventListener('message', (message) => {
       result = args;   // return args unchanged
   }
 
-  self.postMessage(result);  // send result back
+  self.postMessage({ result });  // send result back, an object { result: [...] }
 });
 
 

@@ -25,14 +25,17 @@
       worker.addEventListener('message', message => {  // listener for messages from web worker
         console.log(message);
 
-        trigger.innerText = `Result from Web Worker: ${message.data}. Run again?`;
+        trigger.innerText = `Result from Web Worker: [${message.data.result}]. Run again?`;
         trigger.onclick = run;
       });
 
       function run() {
         trigger.innerText = 'Running the task... UI stays responsive [check buttons above]';
         trigger.onclick = null;
-        worker.postMessage('start');  // send message to web worker to init the task
+        worker.postMessage({
+          func: 'fib',
+          args: [15, 25, 35, 45],
+        });  // send message to web worker to init the task
       }
   
       function setBg(color) {
