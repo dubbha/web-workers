@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="utf-8">
+  <title>Web Worker</title>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+  <!-- <canvas id="fps" width="140" height="62"></canvas> -->
+  <!-- Using OffscreenCanvas instead -->
+  <!-- <canvas id="webgl" width="140" height="62"></canvas>  -->
+
+  <div class="outer">
+    <div class="inner">
+      <canvas id="fps" width="140" height="62"></canvas>
+    </div>
+    <div class="inner">
+      <button class="button" id="r"">red</button>
+      <button class="button" id="g">green</button>
+      <button class="button" id="b">blue</button>
+    </div>
+    <div class="inner">
+      <button id="trigger" class="button trigger">Multiply two random 1024*1024 matrices using WebGL in Web Worker</button>
+      <div id="spinner" class="spinner"></div>
+    </div>
+    <div class="inner">
+      <button id="triggerNoWW" class="button trigger">Multiply two random 1024*1024 matrices using WebGL without Web Worker</button>
+      <div id="spinnerNoWW" class="spinner"></div>
+    </div>
+  </div>
+  <script src="./fps.js"></script>
+  <script src="./main.js" type="module"></script>
+</body>
+</html>
