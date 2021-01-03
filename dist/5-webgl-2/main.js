@@ -16,27 +16,26 @@ Run again?`;
   document.querySelector('#spinner').classList.remove('active');
 });
 
+// const canvas = new OffscreenCanvas(1, 1); // offscreen canvas, need to create it here, because it will be detached after first run
+const canvas = new OffscreenCanvas(1, 1); // create offscreenCanvas and only post it to webwoker once, otherwise  it  will be detached after first run
+worker.postMessage({ canvas }, [canvas]);
+
 function run() {
   trigger.innerText = 'Running the task... UI stays responsive [check buttons above]';
   trigger.onclick = null;
   document.querySelector('#spinner').classList.add('active');
 
-  const webglCanvas = new OffscreenCanvas(1, 1); // offscreen canvas, need to create it here, because it will be detached after first run
-  worker.postMessage(
-    {
-      canvas: webglCanvas,
-      size: 1024,
-    },
-    [webglCanvas],
-  );
+  // const canvas = new OffscreenCanvas(1, 1); // offscreen canvas, need to create it here, because it will be detached after first run
+  worker.postMessage({ size: 1024 });
 }
 
+const noWWCanvas = new OffscreenCanvas(1, 1); // offscreen canvas, need to create it here, because it will be detached after first run
 function runNoWW() {
   triggerNoWW.innerText = `Running the task... UI is not responsive [buttons above won\'t work until finished].
 We gave spinner 100ms to appear and start animating.`;
   triggerNoWW.onclick = null;
 
-  const canvas = new OffscreenCanvas(1, 1); // offscreen canvas, need to create it here, because it will be detached after first run
+  // const canvas = new OffscreenCanvas(1, 1); // offscreen canvas, need to create it here, because it will be detached after first run
   const size = 1024
 
   document.querySelector('#spinnerNoWW').classList.add('active');
@@ -44,7 +43,7 @@ We gave spinner 100ms to appear and start animating.`;
     const startTime = performance.now();
     generateMatrices(size);
     const generationTime = performance.now();
-    const result = calculateGpuResult(canvas, size);
+    const result = calculateGpuResult(noWWCanvas, size);
     const endTime = performance.now();
 
     const time = {

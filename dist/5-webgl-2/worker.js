@@ -1,7 +1,14 @@
+let canvas;
+
 self.addEventListener('message', (message) => {
   // console.log('Web Worker received message:', message);
 
-  const { canvas, size = 3 } = message.data;
+	if (message.data.canvas) { // expect canvas to only be passed once, in a separate message
+		canvas = message.data.canvas; 
+		return;
+	}
+
+	const { size = 3 } = message.data;
   
   const startTime = performance.now();
   generateMatrices(size);
